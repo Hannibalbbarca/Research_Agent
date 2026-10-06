@@ -6,7 +6,9 @@ Our main notebook for exploring ideas, asking deeper questions, and recording de
 
 We are in discussion mode. The goal is to understand the problem and explore possibilities before choosing what to build.
 
-The repository is called **Research_Agent**, but the name alone does not define the product. Its purpose, audience, and scope are still open.
+The project is an **AI Equity Research Agent** for researching companies end to end. Equity research is the initial focus; expanding into other kinds of research is a later possibility.
+
+The user describes the goal as a "handwritten" end-to-end project. What that means for implementation remains to be clarified. The intended users, exact workflow, outputs, and technical approach are still open.
 
 ## How we will use these notes
 
@@ -21,7 +23,7 @@ The repository is called **Research_Agent**, but the name alone does not define 
 1. What problem do we want to solve, and who experiences it?
 2. How do people handle that problem today? What is difficult about it?
 3. What would a useful result look like in a concrete example?
-4. If this becomes a research agent, what should it do independently, and where should a person review its work?
+4. What should the equity research agent do independently, and where should a person review its work?
 5. How would we judge whether its results are accurate and useful?
 6. What is the smallest version that would demonstrate real value?
 
@@ -31,7 +33,9 @@ These are starting questions, not requirements or decisions.
 
 - Start with discussion and explore ideas in depth.
 - Maintain three readable Markdown files on GitHub: ideas, tools, and progress.
-- No product design or implementation stack has been selected yet.
+- Build an AI Equity Research Agent, initially focused on company equity research.
+- Consider other research domains later; they are not part of the initial scope.
+- The detailed product design and implementation stack have not been selected yet.
 
 ## Discussion entries
 
@@ -42,6 +46,20 @@ These are starting questions, not requirements or decisions.
 **Decision:** Use this file for ideas, [TOOLS.md](TOOLS.md) for tools, and [PROGRESS.md](PROGRESS.md) for the journey.
 
 **Next topic:** Define the problem we want to solve and describe one real situation where the solution would help.
+
+### 6 October 2026 — Defining the project vision
+
+**User's idea:** Create a "handwritten" end-to-end AI Equity Research Agent for companies, with the possibility of broadening it into other research later.
+
+**Confirmed direction:** Equity research comes first. We are still discussing the design, rather than starting application implementation.
+
+**Proposed interpretation of the workflow — not yet agreed:** Gather company information and source documents; understand the business and industry; analyze financial performance; evaluate valuation, risks, and possible catalysts; and produce a research report with supporting sources and explicit assumptions.
+
+**Design question to explore:** How will the agent connect its conclusions to dated source evidence and reproducible financial calculations?
+
+**Open questions:** What should "end to end" include? Who will use it? Which markets will it cover? What does "handwritten" mean here? What should the final deliverable contain?
+
+**Next topic:** Describe what a user should receive after asking the agent to research one company.
 
 ## Format for future entries
 

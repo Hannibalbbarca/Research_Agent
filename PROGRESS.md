@@ -6,7 +6,8 @@ Our record of difficulties, lessons, successes, and achievements. This file refl
 
 - GitHub access works, and the initial commit is checked out locally.
 - The repository began with only a README.
-- We are starting discussion and keeping a shared notebook.
+- We are discussing an AI Equity Research Agent and keeping a shared notebook.
+- Initial domain: company equity research. Other research domains are a possible later expansion.
 - No application, dependency setup, or application tests exist yet.
 
 ## Challenges and difficulties
@@ -21,11 +22,13 @@ Our record of difficulties, lessons, successes, and achievements. This file refl
 
 **Status:** Resolved.
 
-### 6 October 2026 — The product direction is still open
+### 6 October 2026 — Defining the research workflow
 
-**What we need to understand:** The problem, intended users, desired results, and boundaries of the project.
+**Progress:** The user has defined the project as an end-to-end AI Equity Research Agent for companies, with broader research as a possible later direction.
 
-**Next step:** Explore a concrete use case in our discussion before selecting tools or implementation details.
+**Still to understand:** Intended users, markets, workflow boundaries, final deliverables, and what "handwritten" means for this project.
+
+**Next step:** Describe the desired result for researching one company before selecting tools or implementation details.
 
 **Status:** Open discussion topic.
 
