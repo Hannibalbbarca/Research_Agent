@@ -19,9 +19,17 @@ A record of the tools we actually use, why we use them, and what remains undecid
 
 These helped prepare the workspace. They are not decisions about the application's technology stack.
 
+## Selected for future implementation
+
+| Tool | Intended purpose | Status |
+| --- | --- | --- |
+| Python | Ordinary code for parsing retrieved company documents. | Selected by the user; no parser code or dependencies installed yet. |
+
+Python has been selected for parsing. The language and framework for other components remain undecided.
+
 ## Not selected yet
 
-We have not chosen an application language, AI provider, agent framework, search service, database, user interface, or deployment platform.
+We have not chosen an AI provider, agent framework, search service, document parsing library, database, user interface, or deployment platform.
 
 We will choose tools after discussing the problem and requirements. A suggested tool should stay marked as a candidate until we agree to use it.
 

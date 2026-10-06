@@ -40,6 +40,7 @@ These are starting questions, not requirements or decisions.
 - The detailed product design and implementation stack have not been selected yet.
 - The user writes the application code; Codex supports decisions and reviews at each step.
 - We remain in discussion mode until the user moves us into implementation.
+- Develop the project piece by piece. The first component is an agentic document retrieval pipeline with ordinary Python parsing, designed for later connection to the main research agent.
 
 ## Discussion entries
 
@@ -74,6 +75,29 @@ These are starting questions, not requirements or decisions.
 **Agreement:** Codex acts as a discussion partner, technical guide, and reviewer. Application implementation remains with the user unless they explicitly ask to change that arrangement. Maintaining these Markdown notes remains Codex's responsibility.
 
 **Current mode:** Discussion. No SDKs, libraries, or implementation approach have been selected.
+
+### 6 October 2026 — First component: document retrieval and parsing
+
+**User's idea:** Build the project in pieces. Start with a system that finds and fetches requested documents from the internet for a company and financial year, then parses the document with a normal Python script. The complete pipeline should later connect to the main research agent.
+
+**Example from the discussion:** Fetch a report for the company transcribed as "Wadilal" for a specified financial year. The exact legal entity and report type must be confirmed rather than inferred from the spoken name.
+
+**Confirmed boundaries:** Agentic retrieval; ordinary Python parsing; a reusable pipeline; user-written application code. We are discussing the design, not implementing it yet.
+
+**Proposed pipeline — not yet finalized:**
+
+1. Accept a company identifier, document type, and financial year.
+2. Resolve the company and reporting period, asking for clarification if ambiguous.
+3. Discover candidate documents, preferring the company's official investor-relations site or authoritative regulatory/exchange sources where relevant.
+4. Download and verify the company, document type, and reporting period using the document itself, not just the search result or filename.
+5. Parse the verified file with Python and preserve source and page references.
+6. Return a consistent result containing the original file location, source URL, document metadata, parsed content, and any errors or extraction warnings.
+
+**Design reasoning:** An agent can help navigate unfamiliar websites and locate documents. Repeatable code should handle downloading, validation checks, parsing, and result formatting where possible. Define a callable interface so the main agent can later use this component without duplicating its internals.
+
+**Open questions:** Is the first supported document an annual-report PDF? Should parsing extract text only, tables, or both? How should scanned pages be handled? What input and output format should the pipeline expose?
+
+**Next topic:** Confirm the first document type before choosing retrieval and parsing libraries.
 
 ## Format for future entries
 

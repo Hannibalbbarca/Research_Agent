@@ -9,6 +9,7 @@ Our record of difficulties, lessons, successes, and achievements. This file refl
 - We are discussing an AI Equity Research Agent and keeping a shared notebook.
 - Initial domain: company equity research. Other research domains are a possible later expansion.
 - Collaboration is defined: the user writes all application code; Codex provides ongoing technical guidance and code review and maintains these notes.
+- The first planned component retrieves company documents for a specified financial year and parses them with Python, with later integration into the main agent.
 - No application, dependency setup, or application tests exist yet.
 
 ## Challenges and difficulties
@@ -33,6 +34,14 @@ Our record of difficulties, lessons, successes, and achievements. This file refl
 
 **Status:** Open discussion topic.
 
+### 6 October 2026 — Document pipeline design questions
+
+**Anticipated difficulties, not observed failures:** Finding the correct legal entity and financial-year report; rejecting misleading links or wrong-year documents; dealing with scanned PDFs and financial tables; and preserving source references during extraction.
+
+**Next step:** Confirm the first document type and desired parsing output, then compare suitable approaches and libraries.
+
+**Status:** Design discussion. No retrieval or parsing behavior has been implemented or tested.
+
 ## Successes and achievements
 
 ### 6 October 2026 — Repository access verified
@@ -50,6 +59,10 @@ Created three linked Markdown documents:
 ### 6 October 2026 — Collaboration clarified
 
 The user clarified that "handwritten" means writing all application code personally. Codex will support method and tool selection, explain tradeoffs, and review code at each step. We remain in discussion mode.
+
+### 6 October 2026 — First component scoped
+
+The user selected document retrieval and Python parsing as the first piece of the project. It should be a reusable pipeline that can later connect to the main research agent. This is a scope decision, not a completed implementation.
 
 ## Lessons so far
 
