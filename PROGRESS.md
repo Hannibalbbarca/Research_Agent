@@ -10,6 +10,7 @@ Our record of difficulties, lessons, successes, and achievements. This file refl
 - Initial domain: company equity research. Other research domains are a possible later expansion.
 - Collaboration is defined: the user writes all application code; Codex provides ongoing technical guidance and code review and maintains these notes.
 - The first planned component retrieves company documents for a specified financial year and parses them with Python, with later integration into the main agent.
+- The user has set the next five to six days aside for this component. Its detailed notebook is [DOCUMENT_AGENT.md](DOCUMENT_AGENT.md).
 - No application, dependency setup, or application tests exist yet.
 
 ## Challenges and difficulties
@@ -65,6 +66,11 @@ The user clarified that "handwritten" means writing all application code persona
 The user selected document retrieval and Python parsing as the first piece of the project. It should be a reusable pipeline that can later connect to the main research agent. This is a scope decision, not a completed implementation.
 
 ## Lessons so far
+
+### Documentation milestone — dedicated component notebook
+
+Created [DOCUMENT_AGENT.md](DOCUMENT_AGENT.md) for discussions, discoveries, approach choices, experiments, challenges, and code review notes about document retrieval and parsing. This records the focus of the work; the component itself has not been implemented.
+
 
 - An empty repository offers no application workflow to install or test.
 - A successful Git check confirms repository access; it does not validate an application.
