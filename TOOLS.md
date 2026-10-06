@@ -6,7 +6,7 @@ A record of the tools we actually use, why we use them, and what remains undecid
 
 | Tool | What we use it for |
 | --- | --- |
-| Codex | Discussing ideas, inspecting the repository, and maintaining our notes. |
+| Codex | Discussing ideas, advising on methods, SDKs and libraries, reviewing user-written code, and maintaining our notes. |
 | Git | Tracking file history and synchronizing changes with GitHub. |
 | GitHub | Hosting the Research_Agent repository and making our notes available later. |
 | Markdown | Writing readable notes with headings, lists, and links. |
@@ -24,6 +24,8 @@ These helped prepare the workspace. They are not decisions about the application
 We have not chosen an application language, AI provider, agent framework, search service, database, user interface, or deployment platform.
 
 We will choose tools after discussing the problem and requirements. A suggested tool should stay marked as a candidate until we agree to use it.
+
+The user will write the application code personally. Codex will explain recommendations and tradeoffs, help with usage questions, and review the resulting code as development progresses.
 
 ## What to record when we add a tool
 

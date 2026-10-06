@@ -8,6 +8,7 @@ Our record of difficulties, lessons, successes, and achievements. This file refl
 - The repository began with only a README.
 - We are discussing an AI Equity Research Agent and keeping a shared notebook.
 - Initial domain: company equity research. Other research domains are a possible later expansion.
+- Collaboration is defined: the user writes all application code; Codex provides ongoing technical guidance and code review and maintains these notes.
 - No application, dependency setup, or application tests exist yet.
 
 ## Challenges and difficulties
@@ -26,7 +27,7 @@ Our record of difficulties, lessons, successes, and achievements. This file refl
 
 **Progress:** The user has defined the project as an end-to-end AI Equity Research Agent for companies, with broader research as a possible later direction.
 
-**Still to understand:** Intended users, markets, workflow boundaries, final deliverables, and what "handwritten" means for this project.
+**Still to understand:** Intended users, markets, workflow boundaries, and final deliverables.
 
 **Next step:** Describe the desired result for researching one company before selecting tools or implementation details.
 
@@ -45,6 +46,10 @@ Created three linked Markdown documents:
 - [IDEAS.md](IDEAS.md): discussions, reasoning, decisions, and open questions.
 - [TOOLS.md](TOOLS.md): tools in use and future selection decisions.
 - [PROGRESS.md](PROGRESS.md): challenges, outcomes, and lessons.
+
+### 6 October 2026 — Collaboration clarified
+
+The user clarified that "handwritten" means writing all application code personally. Codex will support method and tool selection, explain tradeoffs, and review code at each step. We remain in discussion mode.
 
 ## Lessons so far
 

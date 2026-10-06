@@ -8,7 +8,7 @@ We are in discussion mode. The goal is to understand the problem and explore pos
 
 The project is an **AI Equity Research Agent** for researching companies end to end. Equity research is the initial focus; expanding into other kinds of research is a later possibility.
 
-The user describes the goal as a "handwritten" end-to-end project. What that means for implementation remains to be clarified. The intended users, exact workflow, outputs, and technical approach are still open.
+"Handwritten" means the user will write all the application code personally. Codex will assist throughout with methods, architecture, SDK and library choices, explanations, debugging guidance, and code reviews. The intended users, exact workflow, outputs, and technical approach are still open.
 
 ## How we will use these notes
 
@@ -17,6 +17,8 @@ The user describes the goal as a "handwritten" end-to-end project. What that mea
 - Record why we choose an approach, including its tradeoffs.
 - Keep unresolved questions visible so we can return to them.
 - Summarize meaningful discussions instead of copying every chat message.
+- The user owns application implementation. Codex provides guidance and reviews rather than implementing application code unless the user explicitly changes this arrangement.
+- Codex continues maintaining and pushing these discussion notes.
 
 ## First questions to explore
 
@@ -36,6 +38,8 @@ These are starting questions, not requirements or decisions.
 - Build an AI Equity Research Agent, initially focused on company equity research.
 - Consider other research domains later; they are not part of the initial scope.
 - The detailed product design and implementation stack have not been selected yet.
+- The user writes the application code; Codex supports decisions and reviews at each step.
+- We remain in discussion mode until the user moves us into implementation.
 
 ## Discussion entries
 
@@ -57,9 +61,19 @@ These are starting questions, not requirements or decisions.
 
 **Design question to explore:** How will the agent connect its conclusions to dated source evidence and reproducible financial calculations?
 
-**Open questions:** What should "end to end" include? Who will use it? Which markets will it cover? What does "handwritten" mean here? What should the final deliverable contain?
+**Open questions:** What should "end to end" include? Who will use it? Which markets will it cover? What should the final deliverable contain?
+
+**Later clarification:** "Handwritten" means the user writes all application code, with Codex providing ongoing guidance and code review.
 
 **Next topic:** Describe what a user should receive after asking the agent to research one company.
+
+### 6 October 2026 — Agreeing how we will collaborate
+
+**User's clarification:** The user will personally write all application code and wants Codex's assistance throughout: which methods, SDKs, libraries, and other tools to use, along with code review.
+
+**Agreement:** Codex acts as a discussion partner, technical guide, and reviewer. Application implementation remains with the user unless they explicitly ask to change that arrangement. Maintaining these Markdown notes remains Codex's responsibility.
+
+**Current mode:** Discussion. No SDKs, libraries, or implementation approach have been selected.
 
 ## Format for future entries
 
