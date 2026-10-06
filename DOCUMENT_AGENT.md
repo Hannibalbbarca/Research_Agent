@@ -8,6 +8,12 @@ For the next five to six days, we will focus on this component: finding the requ
 
 We are currently in discussion mode. The user writes the application code; Codex helps with design, methods, SDKs, libraries, debugging guidance, and code review. Codex maintains these notes on GitHub.
 
+## Where our notes belong
+
+The three original files keep their existing roles: [IDEAS.md](IDEAS.md) for overall ideas and decisions, [TOOLS.md](TOOLS.md) for the tool inventory, and [PROGRESS.md](PROGRESS.md) for overall challenges and achievements. Update them only when necessary as the project advances.
+
+All detailed explanations and discussions of this document retrieval and parsing component belong in **this file**: architecture, methods, library comparisons, findings, experiments, difficulties, and code review reasoning. Avoid duplicating those details across the three main files.
+
 ## What we have agreed
 
 - Build the project piece by piece, starting with document retrieval and parsing.
@@ -78,6 +84,8 @@ No application code has been submitted for review yet. When the user writes a co
 **Decision:** This file is the detailed notebook for that work. [IDEAS.md](IDEAS.md) remains the overall project notebook; [PROGRESS.md](PROGRESS.md) records project-wide challenges and achievements.
 
 **Current state:** Discussion only. The user is still explaining the requirements.
+
+**Follow-up clarification:** Keep the three original files in their existing roles, making necessary updates as work progresses. Maintain the detailed explanation of this component in this dedicated notebook only.
 
 ## How we will add future entries
 
