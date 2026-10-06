@@ -24,6 +24,8 @@ All detailed explanations and discussions of this document retrieval and parsing
 - The main research agent should be able to delegate document preparation through one request rather than managing each download and parsing step.
 - Persist prepared documents and parsed results for reuse, avoiding repeated downloads and parsing when a suitable saved result already exists.
 - The document component must check parsing quality and report problems before its output is treated as reliable research input.
+- The main research agent should receive relevant passages rather than all document contents at once.
+- Support historical research: obtain and prepare earlier reports when a question requires them, then retrieve relevant sections or chunks across the required documents.
 
 The exact agent framework, libraries, supported document types, and output format have not been chosen. Calling this a pipeline, agent, or sub-agent does not settle its architecture.
 
@@ -31,7 +33,7 @@ The exact agent framework, libraries, supported document types, and output forma
 
 A user requests a company's report for a particular financial year. The component locates the requested document, downloads it, and returns parsed content that the research system can use.
 
-The spoken example was transcribed as "Wadilal." The exact company, year, and report type have not been confirmed. Annual-report PDFs were suggested as a possible starting point, but the user has not yet confirmed that scope.
+The spoken company example was transcribed as "Wadilal." The exact legal entity and reporting period have not been confirmed. The user has included historical annual reports in the envisioned workflow; the full set of document types and first-release scope remain open.
 
 ## Proposed flow — still open for discussion
 
@@ -58,7 +60,29 @@ This is a proposal to discuss, not an implemented or tested design.
 
 **Reuse needs boundaries:** A corrected report, changed document contents, or necessary parser upgrade may justify reprocessing. The freshness policy is still open. Store unsuccessful or partial outcomes with their true status; do not mark them as verified reusable results.
 
-**Context-saving proposal:** Persistence avoids repeated preparation, but returning the entire parsed report on every call would still consume the main agent's context. Consider returning a document identifier and compact metadata first, with access to specific pages or sections when needed. The exact retrieval interface remains undecided.
+**Context-saving direction accepted by the user:** Persistence avoids repeated preparation, but returning the entire parsed report on every call would still consume the main agent's context. Give the main agent relevant passages from the prepared documents. A document identifier and compact metadata, with access to specific pages or sections when needed, remain proposed interface details.
+
+## Historical coverage and targeted retrieval
+
+**User's requirement:** Relevant evidence may be in older documents. If the main agent asks what management decided three years earlier, the document component must obtain and parse the appropriate historical annual report when it is not already prepared. It should then support retrieval of the relevant parts or chunks.
+
+**Important distinction:** The system needs access to the relevant set of documents; the main agent does not need every page in its context. Searching a prepared document collection is different from having an LLM read every page on each request.
+
+**Proposed sequence for a historical question:**
+
+1. Resolve the company, topic, reporting periods, and the reference date or year behind "three years ago."
+2. Check a document inventory for the required periods and preparation status.
+3. Locate, download, parse, validate, and store missing reports as needed.
+4. Search the prepared content within the relevant company, document types, and years.
+5. Return useful passages with company, financial year, source, page, and section references; allow the main agent to request surrounding context or broaden its search.
+
+**Coverage must be explicit:** Record which required reports were found and searchable, which were unavailable, and which had incomplete extraction. A search result is not evidence that all relevant documents were obtained. No matching passage is also not proof that management never discussed the topic.
+
+**Retrieval design proposals:** Keep chunks linked to their full document and section. Preserve sufficient surrounding context, including table headers and units where applicable. Consider keyword and semantic search together, with metadata filters, but no retrieval method or storage/index technology has been selected.
+
+**Historical reasoning caution:** Distinguish a statement made in an older report from a later report's retrospective account. Reporting period, publication date, and decision date can differ. The main agent should use the dated evidence to explain what was stated at the time rather than silently treating a later description as contemporaneous evidence.
+
+**Scope boundary:** "All relevant documents" needs a defined coverage target, such as specified company reports across specified years. It does not mean the entire internet is known to be covered. The initial coverage policy and whether to prepare reports proactively or on demand remain open.
 
 ## What parsing verification should mean
 
@@ -84,7 +108,9 @@ A parser completing without an exception does not prove extraction accuracy. Aut
 - What should happen when a document is missing, ambiguous, inaccessible, or only partly readable?
 - When should a saved document be refreshed or reprocessed?
 - Which extraction checks must pass before content is usable for research?
-- Should the main agent receive a full parsed document, a document reference, or selected sections on demand?
+- How should relevant sections be selected and expanded while keeping source context?
+- How many historical years and which document types should a request cover by default?
+- How should the system track and disclose gaps in document coverage?
 
 ## Tools and approach decisions
 
@@ -109,6 +135,8 @@ These are anticipated difficulties, not failures we have already observed:
 - Reporting partial results clearly rather than presenting them as complete.
 - Reusing stored results without overlooking corrected documents or unreliable extraction.
 - Reducing the main agent's context usage as well as avoiding repeated processing.
+- Retrieving across historical reports without mixing reporting periods or overlooking missing documents.
+- Keeping enough surrounding context to interpret selected passages correctly.
 
 ## Code review notes
 
@@ -137,6 +165,16 @@ No application code has been submitted for review yet. When the user writes a co
 **Proposals added:** Persistent storage with document and parser version tracking; separate checks for document identity and extraction quality; and on-demand access to sections to reduce context usage.
 
 **Status:** Requirements discussion. No storage, retrieval, parsing, or validation behavior has been implemented or tested.
+
+### 6 October 2026 — Historical documents and retrieval of relevant passages
+
+**User's agreement:** The main research agent should receive relevant content instead of all document contents at once.
+
+**User's added requirement:** Questions may require earlier annual reports. For example, understanding a management decision three years earlier requires finding and preparing the relevant historical report, then retrieving the useful parts or chunks.
+
+**Design proposals:** A document inventory that tracks coverage and preparation status; acquisition of missing historical reports; searches filtered by company and period; page-linked passages with access to surrounding context; and clear reporting of missing or unreadable sources.
+
+**Status:** Discussion only. No retrieval method, index, library, or coverage policy has been selected or tested.
 
 ## How we will add future entries
 
