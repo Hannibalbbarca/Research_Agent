@@ -8,6 +8,8 @@ For the next five to six days, we will focus on this component: finding the requ
 
 We are currently in discussion mode. The user writes the application code; Codex helps with design, methods, SDKs, libraries, debugging guidance, and code review. Codex maintains these notes on GitHub.
 
+**First milestone, agreed 8 October 2026:** Start with an agent that takes a natural-language prompt and downloads the requested document. Full parsing, extraction-quality checks, indexing, and passage retrieval remain later milestones. The user continues to own application implementation.
+
 ## Where our notes belong
 
 The three original files keep their existing roles: [IDEAS.md](IDEAS.md) for overall ideas and decisions, [TOOLS.md](TOOLS.md) for the tool inventory, and [PROGRESS.md](PROGRESS.md) for overall challenges and achievements. Update them only when necessary as the project advances.
@@ -46,6 +48,39 @@ The spoken company example was transcribed as "Wadilal." The exact legal entity 
 7. **Save and return:** Retain the original document, parsed content, metadata, source references, and validation results for future reuse. Return a usable result to the caller.
 
 This is a proposal to discuss, not an implemented or tested design.
+
+## First milestone: prompt to downloaded document
+
+**User's request:** Start with an agent that accepts a prompt and downloads the requested document.
+
+**Proposed first scope:** One company, one specified reporting period, and one document per request. Annual-report PDFs are a recommended starting case, not a confirmed restriction. Ambiguous company names or periods should produce a clarification request rather than a guessed download.
+
+**Suggested flow:**
+
+1. Interpret the prompt into a company, document type, and reporting period.
+2. Check saved download metadata for an existing suitable file.
+3. Search for candidate sources and inspect source pages to locate an actual document link.
+4. Prefer official or authoritative sources and check evidence that the candidate matches the request.
+5. Download with ordinary code, check that the response contains the expected file rather than an error page, and retain it with its source metadata.
+6. Return the file path, source URL, identified company and period, and an explicit outcome.
+
+**Example request:** "Download the annual report for [exact company name] for FY 2024–25." The bracketed company is a placeholder, not a resolved test company.
+
+**Proposed agent tools:**
+
+- **Search documents:** Return candidate URLs and source descriptions.
+- **Inspect a source page:** Read relevant page content and links, allowing the agent to locate the document rather than relying on a search snippet.
+- **Download a document:** Save the file through ordinary code and return metadata and download-check results.
+
+The model decides which tool to call next and interprets the evidence. Tool functions perform the network and file operations. Give the model compact results rather than putting PDF contents into its context. A bounded tool-call loop should stop with a result or an explicit unresolved outcome.
+
+**Proposed outcomes:** `downloaded`, `reused`, `needs_clarification`, `not_found`, or `failed`. Download success alone must not imply verified company/year identity or correct parsing. Record identity evidence and unresolved doubts separately; never fabricate a URL or call the task successful just because the model produced an answer.
+
+**Suggested starting stack — not selected or installed:** Python, the chosen model provider's official SDK for tool calling, HTTPX for HTTP requests and downloads, and Pydantic for request and result schemas. A web search provider still needs to be chosen. Start with a small explicit tool-call loop; evaluate an agent framework if later workflow complexity warrants it.
+
+**Initial evidence of success:** For one unambiguous request, save a usable document that matches the request and retain its real source URL. Repeat the request and confirm the existing download is reused. An ambiguous or unavailable request should produce the appropriate unresolved outcome. These checks have not yet been run.
+
+**Next discussion:** Choose the model provider and search approach, then define the request/result structure for the user to implement first.
 
 ## Persistent document preparation
 
@@ -175,6 +210,16 @@ No application code has been submitted for review yet. When the user writes a co
 **Design proposals:** A document inventory that tracks coverage and preparation status; acquisition of missing historical reports; searches filtered by company and period; page-linked passages with access to surrounding context; and clear reporting of missing or unreadable sources.
 
 **Status:** Discussion only. No retrieval method, index, library, or coverage policy has been selected or tested.
+
+### 8 October 2026 — Narrowing the first milestone to downloading
+
+**User's direction:** Start with an agent that takes a prompt and downloads the requested document.
+
+**Scope:** Build toward prompt-to-file behavior first, before full parsing and retrieval. The broader persistent document pipeline remains the longer-term design.
+
+**Recommendations to discuss:** A small Python tool-calling agent with search, source-page inspection, and download tools; the model provider's official SDK; HTTPX; and Pydantic. No provider or search service has been selected.
+
+**Status:** Design and implementation guidance. No application code has been written by Codex, and no download agent has been implemented or tested.
 
 ## How we will add future entries
 
