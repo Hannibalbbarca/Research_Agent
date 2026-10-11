@@ -12,6 +12,19 @@ A record of the tools we actually use, why we use them, and what remains undecid
 | Markdown | Writing readable notes with headings, lists, and links. |
 | Codex cloud environment | Providing the workspace where we inspect and edit repository files. |
 
+## Used or selected for the local prototype
+
+| Tool | Purpose | Evidence/status |
+| --- | --- | --- |
+| Python | Information-agent tools and future parser integration. | User-written local prototype shared for review. |
+| Azure OpenAI | Model inference and tool-call decisions. | User confirmed the local connection works. |
+| OpenAI Python SDK | Connect to the Azure `/openai/v1/` endpoint. | Used in the pasted local code; no dated API-version argument. |
+| python-dotenv | Load local settings from `.env`. | Used in the pasted code; credentials stay local. |
+| ddgs | Initial web-source discovery. | Used in local search experiments; candidate relevance is insufficient for dependable document acquisition. |
+| HTTPX | HTTP requests and download examples. | Downloads attempted by the user; many HTTP 403 responses reported. Reliable acquisition is not yet established. |
+
+These are local-prototype records, not evidence of an installed or tested application in this cloud checkout. Detailed reasoning and results belong in [DOCUMENT_AGENT.md](DOCUMENT_AGENT.md).
+
 ## Used during environment setup
 
 - **Cloud environment onboarding skill:** Guided checkout inspection and setup checks.
@@ -23,13 +36,13 @@ These helped prepare the workspace. They are not decisions about the application
 
 | Tool | Intended purpose | Status |
 | --- | --- | --- |
-| Python | Ordinary code for parsing retrieved company documents. | Selected by the user; no parser code or dependencies installed yet. |
+| Document parser | Parse complex downloaded documents. | Being investigated by the user's friend; implementation and interface not provided here. |
 
-Python has been selected for parsing. The language and framework for other components remain undecided.
+Beautiful Soup, Playwright, managed search/page-reading services, Pydantic, and storage/index options have been discussed but not confirmed as part of the reliable implementation.
 
 ## Not selected yet
 
-We have not chosen an AI provider, agent framework, search service, document parsing library, database, user interface, or deployment platform.
+Azure OpenAI is the current model provider. We have not selected a production search/reading service, agent framework, parser library, database/index, application interface, or deployment platform. Codex as an application runtime was considered and is currently set aside.
 
 We will choose tools after discussing the problem and requirements. A suggested tool should stay marked as a candidate until we agree to use it.
 

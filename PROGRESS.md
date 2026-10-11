@@ -9,9 +9,10 @@ Our record of difficulties, lessons, successes, and achievements. This file refl
 - We are discussing an AI Equity Research Agent and keeping a shared notebook.
 - Initial domain: company equity research. Other research domains are a possible later expansion.
 - Collaboration is defined: the user writes all application code; Codex provides ongoing technical guidance and code review and maintains these notes.
-- The first planned component retrieves company documents for a specified financial year and parses them with Python, with later integration into the main agent.
-- The user has set the next five to six days aside for this component. Its detailed notebook is [DOCUMENT_AGENT.md](DOCUMENT_AGENT.md).
-- No application, dependency setup, or application tests exist yet.
+- The component now aims to gather publicly accessible information as well as retrieve documents. Its detailed notebook remains [DOCUMENT_AGENT.md](DOCUMENT_AGENT.md).
+- The user confirmed Azure connectivity locally and shared a Python search/tool-calling prototype for review. Application code stays local until the user confirms it works; no application files are present in this repository.
+- Candidate relevance, missing-year clarification, and HTTP 403 download failures remain unresolved reliability issues. Browser navigation, parser integration, caching, and broader evidence retrieval are not yet verified.
+- Current work is a sequential engineering study session. A six-to-seven-day focused prototype was discussed as a scoped estimate, not a completed capability or guarantee.
 
 ## Challenges and difficulties
 
@@ -44,6 +45,12 @@ Our record of difficulties, lessons, successes, and achievements. This file refl
 **Status:** Design discussion. No retrieval or parsing behavior has been implemented or tested.
 
 ## Successes and achievements
+
+### 8–11 October 2026 — Local connection and documentation recovery
+
+The user confirmed that the Azure OpenAI connection works locally and provided code for review. This establishes model connectivity, not successful document acquisition.
+
+Cloud workspace startup failures delayed documentation updates. Access returned on 11 October, allowing a documentation-only catch-up covering local experiments, known failures, broader information-agent scope, and the engineering lessons. All detailed reasoning is in [DOCUMENT_AGENT.md](DOCUMENT_AGENT.md).
 
 ### 6 October 2026 — Repository access verified
 

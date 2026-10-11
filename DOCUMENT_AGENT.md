@@ -1,12 +1,23 @@
-# Document Retrieval and Parsing — Discussion Notebook
+# Information Agent — Discussion and Study Notebook
 
-Our dedicated notebook for the first component of the AI Equity Research Agent.
+Our dedicated notebook for the information-gathering component of the AI Equity Research Agent. Document retrieval and parsing remain part of this component.
 
 ## Current focus
 
-For the next five to six days, we will focus on this component: finding the required company documents, fetching them, and parsing them into a form the main research system can read and use.
+The initial focus was document retrieval and parsing. The user has since expanded the goal to an information agent that obtains publicly accessible information from websites, reports, sector research, competitor sources, news, and public discussions. Document preparation remains one capability, rather than the entire scope.
 
-We are currently in discussion mode. The user writes the application code; Codex helps with design, methods, SDKs, libraries, debugging guidance, and code review. Codex maintains these notes on GitHub.
+We are currently in discussion and study mode. The user writes and tests application code locally; Codex helps with design, methods, SDKs, libraries, debugging guidance, and code review. Codex maintains these notes on GitHub. Application code must not be pushed until the user confirms it works locally.
+
+## Current status — 11 October 2026
+
+- **User-confirmed:** The local Azure OpenAI connection works. The prototype uses the OpenAI Python SDK with the Azure `/openai/v1/` route, without a dated API-version parameter.
+- **Local prototype discussed and reviewed:** `ddgs` search, model-requested function calls, conversation history, user selection, and a separate HTTPX downloader. These application files have not been committed by Codex.
+- **User-reported problems:** Missing-period requests sometimes trigger searches without clarification; search candidates often are not the desired document; many download attempts return HTTP 403. Specific failing URLs and responses have not been independently inspected.
+- **Not verified:** Reliable end-to-end retrieval, document identity checks, reuse, browser navigation, parser integration, and source-grounded answers across the broader scope.
+- **Parser:** The user's friend is investigating parsing complex documents. Its final implementation and interface are not yet available here.
+- **Current direction:** Discuss an independent Python information agent; do not use Codex as the runtime for now. Codex integration was explored as an option, not implemented or validated.
+- **Time constraint:** A six-to-seven-day focused prototype was discussed. This is an estimate dependent on scope and access, not a guarantee of universal retrieval.
+- **Study style:** Engineering explanations, very few analogies, concrete examples, prerequisites explained before introducing new terms, and one lesson at a time. No code during the current conceptual lessons.
 
 **First milestone, agreed 8 October 2026:** Start with an agent that takes a natural-language prompt and downloads the requested document. Full parsing, extraction-quality checks, indexing, and passage retrieval remain later milestones. The user continues to own application implementation.
 
@@ -76,11 +87,11 @@ The model decides which tool to call next and interprets the evidence. Tool func
 
 **Proposed outcomes:** `downloaded`, `reused`, `needs_clarification`, `not_found`, or `failed`. Download success alone must not imply verified company/year identity or correct parsing. Record identity evidence and unresolved doubts separately; never fabricate a URL or call the task successful just because the model produced an answer.
 
-**Suggested starting stack — not selected or installed:** Python, the chosen model provider's official SDK for tool calling, HTTPX for HTTP requests and downloads, and Pydantic for request and result schemas. A web search provider still needs to be chosen. Start with a small explicit tool-call loop; evaluate an agent framework if later workflow complexity warrants it.
+**Original starting-stack recommendation:** Python, the model provider's official SDK, HTTPX, and optional Pydantic schemas. The subsequent local prototype uses Azure OpenAI and `ddgs`; see the current status and tool decisions above. Production search/reading services and an agent framework remain undecided.
 
 **Initial evidence of success:** For one unambiguous request, save a usable document that matches the request and retain its real source URL. Repeat the request and confirm the existing download is reused. An ambiguous or unavailable request should produce the appropriate unresolved outcome. These checks have not yet been run.
 
-**Next discussion:** Choose the model provider and search approach, then define the request/result structure for the user to implement first.
+**Current next step:** Study request/response handling and browser rendering, then design source-page inspection and recovery before resuming implementation.
 
 ## Persistent document preparation
 
@@ -149,15 +160,15 @@ A parser completing without an exception does not prove extraction accuracy. Aut
 
 ## Tools and approach decisions
 
-**Selected:** Python for document parsing.
+**Selected or used in the local prototype:** Python; Azure OpenAI; the OpenAI Python SDK; `python-dotenv`; `ddgs` for initial search experiments; HTTPX in the downloader examples.
 
-**Not selected:** Retrieval SDK, agent framework, search provider, download library, parsing library, OCR approach, storage, and integration interface.
+**Not selected for the reliable broader system:** A production search/reading service, agent framework, parser, OCR method, storage/index technology, and browser automation implementation. Beautiful Soup and Playwright were discussed as candidates. Pydantic was suggested but has not been confirmed in use.
 
 As we compare tools, record their purpose, alternatives, tradeoffs, and why we choose them. Keep the overall [tool record](TOOLS.md) updated when a choice is made.
 
 ## Findings and experiments
 
-No document retrieval or parsing experiments have been run yet. Future entries should identify the document or source examined, the method tried, the observed result, and its limitations.
+The user has run local connection and retrieval experiments. Azure connectivity was reported successful; retrieval exposed clarification, candidate relevance, and HTTP 403 problems. No independent live application validation or successful parser integration has been performed in this cloud repository. Future experiments should record the exact source, method, outcome, cost/time where available, and limitations.
 
 ## Challenges to investigate
 
@@ -175,7 +186,17 @@ These are anticipated difficulties, not failures we have already observed:
 
 ## Code review notes
 
-No application code has been submitted for review yet. When the user writes a component, record the version reviewed, findings, reasoning, and follow-up outcomes here.
+The user pasted the main Azure tool-calling script for review. Findings and proposed changes:
+
+- `run_agent(prompt)` received the conversation but appended to a global `messages` variable. Rename the parameter to `messages` and operate on that argument consistently.
+- Create conversation history once outside the input loop. Append user messages, assistant messages, and tool results so the agent can ask a clarification question and remember the reply.
+- A textual clarification question is already allowed by the system prompt; the earlier one-shot program ended after displaying it. Conversation handling and enforcement of required fields are separate issues.
+- Instructions do not guarantee clarification. A future request-validation gate should block acquisition when essential details remain unresolved, while avoiding unnecessary questions for already identifiable documents.
+- Preserve structured candidate dictionaries instead of extracting URLs from the model's prose. Proposed selection code deduplicates candidates by URL and lets the user choose or cancel.
+- Keep downloading in a separate ordinary Python function. Return the saved file path and actual source URL for later parser integration.
+- The proposed PDF-header check is only a basic format check, not a guarantee of correct identity, valid structure, or accurate extraction.
+
+These are review findings and local code suggestions, not evidence that the resulting application passed end-to-end tests.
 
 ## Discussion log
 
@@ -220,6 +241,71 @@ No application code has been submitted for review yet. When the user writes a co
 **Recommendations to discuss:** A small Python tool-calling agent with search, source-page inspection, and download tools; the model provider's official SDK; HTTPX; and Pydantic. No provider or search service has been selected.
 
 **Status:** Design and implementation guidance. No application code has been written by Codex, and no download agent has been implemented or tested.
+
+### 8–9 October 2026 — Local coding and discovery failures
+
+**Confirmed by the user:** Azure model connectivity works. Local settings remain in `.env`; no secret values belong in the notes or repository.
+
+**Concepts studied:** Instructions and context are Python variables placed into request messages; message roles; tool declarations versus actual tool execution; JSON tool arguments; tool-call identifiers; `__name__ == "__main__"`; and persistent conversation history.
+
+**Observed by the user:** An annual-report request without a year produced candidates for an assumed year. The user reported that a newer report was also available; that availability was not independently verified.
+
+**Design changes discussed:** General clarification policy, Python-controlled validation, conversation follow-ups, structured candidate selection, downloading, and a future parser bridge.
+
+**Discovery diagnosis:** `ddgs` may use different search backends. Five search snippets are not a reliable document inventory. Many results point to reporting pages rather than actual report files. Source-page inspection and link navigation are missing capabilities; browser automation has not been demonstrated to fail because it has not yet been implemented in this prototype.
+
+**403 diagnosis:** HTTP 403 indicates refusal by a responding server or intermediary, not a specific cause. Expired links, session requirements, rate limits, or automated-access restrictions are possibilities requiring source-specific evidence. No bypass or fix has been established.
+
+### 9–10 October 2026 — Broader information agent and architecture options
+
+**User's scope:** Company and competitor websites, sector reports such as CRISIL research, news, social commentary, historical documents, and other publicly accessible information. An accessible source may still be incomplete, restricted, or unavailable to automation; universal coverage is not guaranteed.
+
+**Options discussed:** Provider-managed web/research services; search plus page-reading services; browser automation; authoritative-source connectors; and a hybrid routing approach. No paid service has been chosen or enabled, and no spending limit has been set.
+
+**Codex option explored:** Reuse an open-source agent runtime with compatible Azure models. An API key, endpoint, deployment, supported inference interface, and tool compatibility would be required. No current model availability, Azure-specific pricing, runtime compatibility, or private Codex browsing implementation was verified. Deprecated and retired models have different lifecycle implications; a displayed zero price is not evidence of free access. This integration is set aside for now.
+
+**API concept studied:** Chat Completions uses conversation messages and returns choices. Responses uses input and output items, with additional capabilities depending on provider and model. Both can support function tools; switching APIs alone does not supply browsing.
+
+**Proposed Python modules — not created or implemented:**
+
+| Module | Responsibility |
+| --- | --- |
+| `main.py` | User conversation and entry point for later main-agent integration. |
+| `agent.py` | Azure model connection, reasoning, and tool-call orchestration. |
+| `web_search.py` | Source discovery. |
+| `webpage_reader.py` | Page text, link labels, and resolved destination URLs. |
+| `document_selector.py` | User selection and eventual human-review integration. |
+| `document_downloader.py` | Acquisition and basic download checks. |
+| `document_store.py` | Originals, metadata, preparation status, and reuse. |
+| `parser_bridge.py` | Interface to the friend's parser. |
+| `evidence_retriever.py` | Relevant passages from prepared sources. |
+| `source_checks.py` | Specific identity, coverage, and evidence checks. |
+
+Browser navigation and source-specific connectors are possible later extensions. Several Python tools can be coordinated by one reasoning agent; each module does not require its own model.
+
+**Efficiency policy proposed:** Reuse suitable saved sources; use ordinary page reading before browser navigation where sufficient; classify failures and switch acquisition strategy; preserve source/date/page evidence; disclose missing coverage and partial results. Repeating an unchanged failing request is not meaningful recovery.
+
+**Benchmark proposed, not executed:** Annual report acquisition, historical management evidence, company website facts, sector research, and public commentary. Measure correct retrieval, evidence quality, coverage, time, cost, and recovery. A response containing links does not complete a file-acquisition task; social opinions must be distinguished from substantiated facts.
+
+### 10–11 October 2026 — Engineering study session
+
+**Agreed sequence:** (1) Website requests and networking; (2) HTML, CSS, JavaScript, and the DOM; (3) navigation, APIs, cookies, and sessions; (4) restrictions and legitimate acquisition options; (5) browser observation/action loops; (6) information-agent design and validation.
+
+**Browser-tool introduction:** The model chooses an action, a tool executes it, and the model receives another observation. Observations may be extracted text, structured live-page information, or screenshots. Browser tools can maintain sessions and execute JavaScript; a click may update the existing page instead of returning a new HTML document. Not every research task needs a visual browser. Private Codex infrastructure has not been inspected.
+
+**Lesson 1A — Client, server, addresses, and DNS:**
+
+- A client initiates requests; a server program receives them and returns content. A Python HTTP program can be a client.
+- IP addresses identify network destinations, not individual reports.
+- A URL specifies a communication scheme, hostname, and resource path. Webpages and PDF files are different resources.
+- DNS resolves a hostname to network addressing information. A resolver can reuse valid cached answers or obtain new answers from DNS services. DNS does not return the webpage or report.
+- `192.0.2.10` and `example.com` in lessons are illustrative, not live research targets.
+
+**Lesson 1B — Connection and HTTP exchange:** The common HTTPS flow establishes a transport connection, uses TLS to authenticate the website name and protect transmitted data, and exchanges HTTP requests and responses. A request specifies the operation and resource; a response contains a status, headers, and body. `Content-Type` identifies the body format. HTTP 200 does not prove that the expected report was obtained; HTTP 403 establishes refusal, not its precise cause. The next lesson examines how browsers interpret HTML and execute JavaScript.
+
+### 11 October 2026 — Notebook catch-up
+
+Earlier cloud startup failures blocked repository inspection and note maintenance. Workspace access returned on 11 October. The checkout was clean and matched remote `main` before this documentation-only catch-up. The repository contained Markdown notes and no application code. Local experiments remain user-reported and separate from cloud validation. No application code or credentials are included in this update.
 
 ## How we will add future entries
 

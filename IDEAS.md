@@ -8,7 +8,7 @@ We are in discussion mode. The goal is to understand the problem and explore pos
 
 The project is an **AI Equity Research Agent** for researching companies end to end. Equity research is the initial focus; expanding into other kinds of research is a later possibility.
 
-**Active focus:** For the next five to six days, concentrate on document retrieval and parsing. Detailed discussions and discoveries for this component live in [DOCUMENT_AGENT.md](DOCUMENT_AGENT.md).
+**Active focus, updated 11 October 2026:** A general information agent for publicly accessible sources, with document retrieval and parsing as one capability. We are studying website and browser engineering before resuming implementation. Detailed discussions and study notes live in [DOCUMENT_AGENT.md](DOCUMENT_AGENT.md).
 
 "Handwritten" means the user will write all the application code personally. Codex will assist throughout with methods, architecture, SDK and library choices, explanations, debugging guidance, and code reviews. The intended users, exact workflow, outputs, and technical approach are still open.
 
@@ -44,6 +44,8 @@ These are starting questions, not requirements or decisions.
 - We remain in discussion mode until the user moves us into implementation.
 - Develop the project piece by piece. The first component is an agentic document retrieval pipeline with ordinary Python parsing, designed for later connection to the main research agent.
 - Use a dedicated [document component notebook](DOCUMENT_AGENT.md) for this phase's detailed discussion and findings.
+- The component's scope now includes websites, sector research, competitors, news, public commentary, and documents. Codex-runtime integration was explored and is set aside for now.
+- The user writes and tests application code locally; push it only after the user confirms it works. Documentation maintenance continues separately.
 
 ## Discussion entries
 
