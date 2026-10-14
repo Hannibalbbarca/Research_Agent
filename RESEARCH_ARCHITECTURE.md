@@ -93,6 +93,20 @@ These questions are recorded for later discussion; we will take them one at a ti
 
 **Next topic proposed by Codex:** Define the basic company understanding we want from the official website before deciding the extent of reading. A possible initial profile covers what the company sells, who and where it sells to, how it earns revenue, and links to investor information and reports. The scope remains open for discussion.
 
+## Discussion 6 — Model knowledge versus web research
+
+**User's question:** When ChatGPT is asked for a short overview of Vadilal Industries, does the model already contain that information, or does it search the web?
+
+**Explanation:** Both paths are possible. A model may generate a broad description from patterns and information learned during training. This is not a live database lookup, and the generated description may be incomplete, stale, or wrong. The presence of a company in training does not establish that any particular fact or source is retained reliably.
+
+ChatGPT is an application that can also provide a model with tools, including web search when available. A response may use prior knowledge, retrieved sources, or both. A general company-overview request does not guarantee web research. Search behaviour depends on the product mode, available tools, instructions, and routing. Search activity and cited sources help assess retrieval; fluent or confident writing is not evidence of a search or verification of every claim.
+
+**Application distinction:** Connecting an Azure model does not automatically supply web search. Our program must provide and execute search or browser tools and return their results to the model.
+
+**Architecture suggestion from Codex, not a selected policy:** Model knowledge can orient an initial investigation and suggest what to inspect. Treat the business profile used as research evidence as source-backed information with references and relevant dates. A generated overview and a verified company profile are different stages.
+
+No live search or verification of Vadilal Industries was performed for this conceptual explanation.
+
 ## Decisions and open questions
 
 **Confirmed:** Maintain the discussion record and examine the architecture incrementally. Set aside prior implementation choices as constraints on this design discussion.
