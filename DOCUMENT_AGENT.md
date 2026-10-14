@@ -8,7 +8,15 @@ The initial focus was document retrieval and parsing. The user has since expande
 
 We are currently in discussion and study mode. The user writes and tests application code locally; Codex helps with design, methods, SDKs, libraries, debugging guidance, and code review. Codex maintains these notes on GitHub. Application code must not be pushed until the user confirms it works locally.
 
-## Current status — 11 October 2026
+## Latest position — 14 October 2026
+
+The user has paused implementation to discuss the broader research architecture from first principles. That discussion is recorded in [RESEARCH_ARCHITECTURE.md](RESEARCH_ARCHITECTURE.md). This file retains the information-agent design and experiment history.
+
+Since the earlier status below, the user has tried Browser Use 0.13.11 locally with Azure GPT-4.1 mini, confirmed browser startup and model connectivity, and supplied a terminal trace. In the first Infosys run, navigation drifted to a quarterly document and failed back-navigation attempts; the run finished unsuccessfully and logged browser closure. The second downloaded an FY2025–26 annual report rather than the requested FY2024–25 report, encountered output truncation and scroll timeouts, and ended with Ctrl+C at step 10.
+
+The second run's Windows immediate-exit message corresponds to the library's `os._exit(0)` signal-handler path, which can bypass application `finally` cleanup. A download, the model's success assessment, and verified retrieval are distinct outcomes. Neither supplied report run established success on the requested document. No CAPTCHA was shown, and comprehensive runtime timings were unavailable. No code fixes were made; the user requested explanation before changes.
+
+## Earlier status — 11 October 2026
 
 - **User-confirmed:** The local Azure OpenAI connection works. The prototype uses the OpenAI Python SDK with the Azure `/openai/v1/` route, without a dated API-version parameter.
 - **Local prototype discussed and reviewed:** `ddgs` search, model-requested function calls, conversation history, user selection, and a separate HTTPX downloader. These application files have not been committed by Codex.

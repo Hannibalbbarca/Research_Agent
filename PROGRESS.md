@@ -11,10 +11,21 @@ Our record of difficulties, lessons, successes, and achievements. This file refl
 - Collaboration is defined: the user writes all application code; Codex provides ongoing technical guidance and code review and maintains these notes.
 - The component now aims to gather publicly accessible information as well as retrieve documents. Its detailed notebook remains [DOCUMENT_AGENT.md](DOCUMENT_AGENT.md).
 - The user confirmed Azure connectivity locally and shared a Python search/tool-calling prototype for review. Application code stays local until the user confirms it works; no application files are present in this repository.
-- Candidate relevance, missing-year clarification, and HTTP 403 download failures remain unresolved reliability issues. Browser navigation, parser integration, caching, and broader evidence retrieval are not yet verified.
-- Current work is a sequential engineering study session. A six-to-seven-day focused prototype was discussed as a scoped estimate, not a completed capability or guarantee.
+- Browser Use 0.13.11 with Azure GPT-4.1 mini has been tried locally. The user confirmed browser startup and model connectivity; a pasted terminal trace shows navigation and downloads, but neither included Infosys run established retrieval of the requested FY2024–25 report.
+- Candidate relevance, missing-year clarification, HTTP 403 download failures, navigation recovery, and document identity remain reliability issues. Parser integration, caching, and dependable broader evidence retrieval remain unverified.
+- Current work, as of 14 October, is a discussion of broader research architecture, recorded in [RESEARCH_ARCHITECTURE.md](RESEARCH_ARCHITECTURE.md). No application-code changes are requested. A six-to-seven-day focused prototype was previously discussed as a scoped estimate, not a completed capability or guarantee.
 
 ## Challenges and difficulties
+
+### 12 October 2026 — Browser-agent trace review
+
+The first Infosys attempt downloaded an unrelated quarterly document, mishandled back navigation in a new tab, visited an unsuccessful reports URL, and finished with `success: False`. Its final inference that the requested report was unavailable was stronger than the evidence supported. It logged normal browser cleanup.
+
+The second attempt downloaded an annual report identified by extracted text as FY2025–26, rather than FY2024–25. It also encountered a model output truncated at 4096 output tokens and two scroll timeouts. It ended with Ctrl+C at step 10, not a successful final answer. Browser Use 0.13.11's Windows signal handler calls `os._exit(0)`, which can bypass the application's normal `finally` cleanup. The total runtime cannot be attributed precisely because comprehensive timestamps were absent.
+
+**Lesson:** Separate an executed browser action, the model's interpretation, and independently checked task completion. A wrong-year download is not successful retrieval of the requested report. No CAPTCHA appears in the supplied trace.
+
+**Status:** Diagnosed from the user's terminal output and the published library source; fixes have not been implemented or tested. The user asked to understand the setup before changing code.
 
 ### 6 October 2026 — The repository initially had no commits
 
@@ -45,6 +56,10 @@ Our record of difficulties, lessons, successes, and achievements. This file refl
 **Status:** Design discussion. No retrieval or parsing behavior has been implemented or tested.
 
 ## Successes and achievements
+
+### 14 October 2026 — Architecture discussion record established
+
+Created [RESEARCH_ARCHITECTURE.md](RESEARCH_ARCHITECTURE.md) to preserve the new discussion, distinguish proposals from decisions, and track unresolved assumptions. The first proposed stage covers company identification and official-website reading. This is documentation progress, not an implemented research workflow.
 
 ### 8–11 October 2026 — Local connection and documentation recovery
 

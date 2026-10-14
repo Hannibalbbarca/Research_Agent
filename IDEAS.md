@@ -8,7 +8,7 @@ We are in discussion mode. The goal is to understand the problem and explore pos
 
 The project is an **AI Equity Research Agent** for researching companies end to end. Equity research is the initial focus; expanding into other kinds of research is a later possibility.
 
-**Active focus, updated 11 October 2026:** A general information agent for publicly accessible sources, with document retrieval and parsing as one capability. We are studying website and browser engineering before resuming implementation. Detailed discussions and study notes live in [DOCUMENT_AGENT.md](DOCUMENT_AGENT.md).
+**Active focus, updated 14 October 2026:** Discuss the broader equity research architecture from first principles: human research, meta-reasoning, company identification, and initial business understanding. Proceed one small question at a time and record the discussion in [RESEARCH_ARCHITECTURE.md](RESEARCH_ARCHITECTURE.md). Earlier information-agent experiments remain in [DOCUMENT_AGENT.md](DOCUMENT_AGENT.md); they do not constrain the new design discussion.
 
 "Handwritten" means the user will write all the application code personally. Codex will assist throughout with methods, architecture, SDK and library choices, explanations, debugging guidance, and code reviews. The intended users, exact workflow, outputs, and technical approach are still open.
 
@@ -48,6 +48,18 @@ These are starting questions, not requirements or decisions.
 - The user writes and tests application code locally; push it only after the user confirms it works. Documentation maintenance continues separately.
 
 ## Discussion entries
+
+### 14 October 2026 — Broader architecture and the first company-understanding stage
+
+**User's direction:** Pause implementation, examine how humans conduct equity research, question assumptions, and record the continuing discussion.
+
+**Discussed:** Meta-reasoning directs which questions to investigate and when to pivot, defer, or stop. An earlier ice-cream example skipped how the analyst establishes the company's identity and business activities.
+
+**User's proposed entry flow:** Extract the company name or ask for it; visit the official website; read its information to build basic company knowledge and discover annual reports and other sources. Requests could concern general company research or a historical share-price fall.
+
+**Open assumptions:** A name may be ambiguous; the official domain must be verified; "all information" needs a coverage and stopping definition; current website information alone cannot establish a historical explanation. These are questions to discuss, not finalized requirements.
+
+**Documentation decision:** Use [RESEARCH_ARCHITECTURE.md](RESEARCH_ARCHITECTURE.md) for the detailed broader discussion and keep the three original files as summaries.
 
 ### 6 October 2026 — Starting our shared notebook
 
