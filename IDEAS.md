@@ -59,6 +59,8 @@ These are starting questions, not requirements or decisions.
 
 **Open assumptions:** A name may be ambiguous; the official domain must be verified; "all information" needs a coverage and stopping definition; current website information alone cannot establish a historical explanation. These are questions to discuss, not finalized requirements.
 
+**User's subsequent clarification:** Assume the user supplies a clear company name. The normal flow should proceed without a mandatory company-confirmation step. Next, define the intended initial business understanding and website-reading scope; exceptions remain separate from this working assumption.
+
 **Documentation decision:** Use [RESEARCH_ARCHITECTURE.md](RESEARCH_ARCHITECTURE.md) for the detailed broader discussion and keep the three original files as summaries.
 
 ### 6 October 2026 — Starting our shared notebook

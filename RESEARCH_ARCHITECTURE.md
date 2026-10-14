@@ -71,6 +71,8 @@ Possible evidence includes the official website's business overview, the annual 
 
 **Identity:** A company name may refer to multiple entities, a brand, a parent, or a subsidiary. Having a name does not always identify the listed company being researched. Codex proposes resolving ambiguity before associating a website or financial information with the company; this is not yet a finalized rule.
 
+**Subsequent user response:** The user expects the person requesting research to provide a clear company name. Use this as the normal-path input assumption; see Discussion 5 below.
+
 **Official website:** How will we establish that a domain belongs to the intended legal entity? Do not treat a search rank or similar company name as verification.
 
 **Website coverage:** What does "all information" include: business pages, product pages, investor pages, reports, subsidiaries, news archives, careers, or dynamically generated content? Reading every reachable page may introduce duplication and substantial cost. A focused initial reading and a map of further sources is a possible alternative, not a selected replacement for the user's proposal.
@@ -83,12 +85,22 @@ Possible evidence includes the official website's business overview, the annual 
 
 These questions are recorded for later discussion; we will take them one at a time.
 
+## Discussion 5 — Assume a clear company name in the normal flow
+
+**User's position:** A person requesting company research should be conscious of which company they want to investigate and provide a sufficiently clear name.
+
+**Working interpretation:** Proceed from the supplied company name without a mandatory identity-confirmation step. Ask for the name when missing, as already proposed. Actual conflicting evidence can be handled as an exception; do not make hypothetical ambiguity dominate the initial architecture discussion. This assumption does not itself establish that a discovered website is official.
+
+**Next topic proposed by Codex:** Define the basic company understanding we want from the official website before deciding the extent of reading. A possible initial profile covers what the company sells, who and where it sells to, how it earns revenue, and links to investor information and reports. The scope remains open for discussion.
+
 ## Decisions and open questions
 
 **Confirmed:** Maintain the discussion record and examine the architecture incrementally. Set aside prior implementation choices as constraints on this design discussion.
 
 **User proposal to explore:** Begin with company identification, official-site reading, initial business understanding, and discovery of further sources.
 
-**Next question:** If the supplied company name matches more than one entity, how should the system establish which company the user means?
+**Working input assumption:** The user supplies a clear company name; the normal flow does not require asking them to confirm it again.
+
+**Next question:** What should the system understand about the company after its first reading of the official website?
 
 No new model, framework, crawler, storage technology, or application code was selected or implemented in this discussion.
