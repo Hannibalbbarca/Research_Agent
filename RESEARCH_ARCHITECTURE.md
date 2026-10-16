@@ -125,6 +125,22 @@ No live search or verification of Vadilal Industries was performed for this conc
 
 No application code was edited, installed, or pushed in this discussion. Existing variable names and interfaces should be inspected before supplying integration code.
 
+## Discussion 8 — 16 October 2026: request-intake script review
+
+**Material supplied:** The user pasted the request-intake script, importing `client` and `DEPLOYMENT` from `azure_config`, and `ResearchRequest` from `research_request`. The script's filename was not provided. The imported files have not yet been supplied in this review.
+
+**Observed structure:** Maintain a conversation; parse model responses into `ResearchRequest`; ask for clarification or present an understanding; keep a proposed company/objective tuple in `pending_values`; construct `confirmed_request` from that tuple after a model-reported approval; print the approved values. There are no research/search/browser calls in this pasted script.
+
+**Architectural interpretation:** This is the request-intake stage. Its natural handoff is the `confirmed_request` object, whose `company_name` and `research_objective` fields can feed website discovery and relevant-page reading. Do not assume that a website tool already exists in the imported files.
+
+**Confirmation behaviour requiring attention:** The active acceptance condition checks `request.user_confirmed` and the existence of `pending_values`. It does not require `request.ready_to_confirm`, nonempty current fields, or equality between current and pending values. Copying the pending pair intentionally preserves the proposal shown to the user, but the decision that the latest reply approves that proposal still depends on the model. A misclassified correction or approval concerning a changed request could therefore commit stale values. The commented-out stricter condition is inactive; exact equality has tradeoffs when the model rephrases a genuinely approved value. Review the schema and intended approval behaviour before choosing a fix.
+
+**Integration consideration:** The conversation loop currently runs at module level. Importing this script would execute it. If it later becomes an imported component, a function boundary and entry-point handling will need consideration; no refactor is being made now.
+
+**Other boundary:** A structured response helps constrain representation; it does not by itself establish correct interpretation of the user's intent. The `ResearchRequest` class is needed to assess its actual validation rules. API-error and refusal handling are not fully assessed from the pasted script alone.
+
+**Next review input:** Ask for `research_request.py` and the client setup in `azure_config.py`, without secret values or the `.env` file. Then define the next component around the actual confirmed-request interface. This was a static review; no application code was executed, edited, or pushed.
+
 ## Decisions and open questions
 
 **Confirmed:** Maintain the discussion record and examine the architecture incrementally. Set aside prior implementation choices as constraints on this design discussion.
@@ -133,7 +149,7 @@ No application code was edited, installed, or pushed in this discussion. Existin
 
 **Working input assumption:** The user supplies a clear company name; the normal flow does not require asking them to confirm it again.
 
-**Latest user-reported milestone:** The company and research objective are stored by the local program.
+**Latest milestone:** The user reports local company/objective capture and has provided its intake script for static review. The imported request schema and Azure configuration remain to be reviewed.
 
 **Next step:** Design and connect website discovery and relevant-page reading to those inputs, starting with the official-site and business-description milestone. Define initial reading scope and source evidence as part of that work.
 

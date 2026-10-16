@@ -61,6 +61,8 @@ The second attempt downloaded an annual report identified by extracted text as F
 
 The user reports having implemented a local program that stores the company and research objective in variables. This is a user-reported input-stage milestone, not independent validation or evidence of successful website research. The next stage is to discover the official website and gather source-backed relevant information.
 
+**Subsequent review:** The user pasted the intake script. Static review identified its `confirmed_request` handoff, a model-dependent approval gate that may accept a stale proposal if a reply is misclassified, and module-level execution to consider during later integration. The imported request schema and Azure client configuration have not yet been provided. No application code was run or changed. Details are in [RESEARCH_ARCHITECTURE.md](RESEARCH_ARCHITECTURE.md).
+
 ### 14 October 2026 — Architecture discussion record established
 
 Created [RESEARCH_ARCHITECTURE.md](RESEARCH_ARCHITECTURE.md) to preserve the new discussion, distinguish proposals from decisions, and track unresolved assumptions. The first proposed stage covers company identification and official-website reading. This is documentation progress, not an implemented research workflow.
