@@ -107,6 +107,24 @@ ChatGPT is an application that can also provide a model with tools, including we
 
 No live search or verification of Vadilal Industries was performed for this conceptual explanation.
 
+## Discussion 7 — 16 October 2026: company and objective captured
+
+**User-reported progress:** A local program now captures the company and the user's research objective in variables. The implementation has not been provided or independently reviewed here.
+
+**Requested next stage:** Locate the company's official website and fetch relevant information.
+
+**Proposed component boundary:** Accept the company and research objective; discover and inspect candidate official domains; choose pages relevant to the initial business profile and objective; return source-backed findings, discovered document links, and unresolved gaps.
+
+**Website discovery:** Search can locate candidate domains even when search snippets alone were inadequate for report retrieval. Inspect legal-company, contact, and investor information rather than assuming the first search result or a model-generated URL is official. If the evidence remains inconclusive, retain an unverified outcome instead of silently proceeding as confirmed. This is website verification, not a mandatory repeat confirmation of a clear company name.
+
+**Reading proposal:** Start with the business overview and relevant product/service pages. Discover investor-relations and report/archive links for further investigation. Let the research objective determine additional pages and required dates; current business descriptions do not by themselves explain historical share-price movements. Exhaustive crawling has not been selected.
+
+**Proposed returned information:** Company name, official-site URL and identity evidence, business description, relevant findings with source URLs and dates where available, document/source links, pages examined, and missing or inaccessible information. Keep candidate links distinct from opened or verified documents.
+
+**Immediate suggested milestone:** Return an evidence-supported official website and one source-backed business description. Broader page acquisition follows after checking this result. Browser Use remains an available earlier prototype option; the implementation choice for this new component is not yet confirmed.
+
+No application code was edited, installed, or pushed in this discussion. Existing variable names and interfaces should be inspected before supplying integration code.
+
 ## Decisions and open questions
 
 **Confirmed:** Maintain the discussion record and examine the architecture incrementally. Set aside prior implementation choices as constraints on this design discussion.
@@ -115,6 +133,8 @@ No live search or verification of Vadilal Industries was performed for this conc
 
 **Working input assumption:** The user supplies a clear company name; the normal flow does not require asking them to confirm it again.
 
-**Next question:** What should the system understand about the company after its first reading of the official website?
+**Latest user-reported milestone:** The company and research objective are stored by the local program.
+
+**Next step:** Design and connect website discovery and relevant-page reading to those inputs, starting with the official-site and business-description milestone. Define initial reading scope and source evidence as part of that work.
 
 No new model, framework, crawler, storage technology, or application code was selected or implemented in this discussion.

@@ -8,7 +8,7 @@ We are in discussion mode. The goal is to understand the problem and explore pos
 
 The project is an **AI Equity Research Agent** for researching companies end to end. Equity research is the initial focus; expanding into other kinds of research is a later possibility.
 
-**Active focus, updated 14 October 2026:** Discuss the broader equity research architecture from first principles: human research, meta-reasoning, company identification, and initial business understanding. Proceed one small question at a time and record the discussion in [RESEARCH_ARCHITECTURE.md](RESEARCH_ARCHITECTURE.md). Earlier information-agent experiments remain in [DOCUMENT_AGENT.md](DOCUMENT_AGENT.md); they do not constrain the new design discussion.
+**Active focus, updated 16 October 2026:** The user reports a local program that captures the company and research objective. The next requested stage is finding its official website and gathering relevant information. Design this incrementally, with explicit sources and outcomes; record the discussion in [RESEARCH_ARCHITECTURE.md](RESEARCH_ARCHITECTURE.md). Earlier information-agent experiments remain in [DOCUMENT_AGENT.md](DOCUMENT_AGENT.md); they do not constrain the new design discussion.
 
 "Handwritten" means the user will write all the application code personally. Codex will assist throughout with methods, architecture, SDK and library choices, explanations, debugging guidance, and code reviews. The intended users, exact workflow, outputs, and technical approach are still open.
 
@@ -48,6 +48,14 @@ These are starting questions, not requirements or decisions.
 - The user writes and tests application code locally; push it only after the user confirms it works. Documentation maintenance continues separately.
 
 ## Discussion entries
+
+### 16 October 2026 — Connecting company and objective inputs to website research
+
+**User-reported milestone:** The local program stores the company and research objective in variables. Its code has not been inspected here.
+
+**Requested next stage:** Reach the company's official website and fetch relevant information.
+
+**Proposed approach:** Separate domain discovery and verification from relevant-page reading. First establish the official website and a source-backed business description; discover further report/source links without claiming those documents have already been read or verified. Use the objective to guide subsequent acquisition. Integration details and reading scope remain to be settled.
 
 ### 14 October 2026 — Broader architecture and the first company-understanding stage
 

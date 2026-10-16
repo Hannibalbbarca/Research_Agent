@@ -13,7 +13,7 @@ Our record of difficulties, lessons, successes, and achievements. This file refl
 - The user confirmed Azure connectivity locally and shared a Python search/tool-calling prototype for review. Application code stays local until the user confirms it works; no application files are present in this repository.
 - Browser Use 0.13.11 with Azure GPT-4.1 mini has been tried locally. The user confirmed browser startup and model connectivity; a pasted terminal trace shows navigation and downloads, but neither included Infosys run established retrieval of the requested FY2024–25 report.
 - Candidate relevance, missing-year clarification, HTTP 403 download failures, navigation recovery, and document identity remain reliability issues. Parser integration, caching, and dependable broader evidence retrieval remain unverified.
-- Current work, as of 14 October, is a discussion of broader research architecture, recorded in [RESEARCH_ARCHITECTURE.md](RESEARCH_ARCHITECTURE.md). No application-code changes are requested. A six-to-seven-day focused prototype was previously discussed as a scoped estimate, not a completed capability or guarantee.
+- As of 16 October, the user reports a local program that captures company and research-objective variables. This new implementation has not been inspected here. The next requested stage is official-website discovery and relevant-information acquisition, discussed in [RESEARCH_ARCHITECTURE.md](RESEARCH_ARCHITECTURE.md). No application code has been changed or pushed by Codex. A six-to-seven-day focused prototype was previously discussed as a scoped estimate, not a completed capability or guarantee.
 
 ## Challenges and difficulties
 
@@ -56,6 +56,10 @@ The second attempt downloaded an annual report identified by extracted text as F
 **Status:** Design discussion. No retrieval or parsing behavior has been implemented or tested.
 
 ## Successes and achievements
+
+### 16 October 2026 — Company and research objective captured locally
+
+The user reports having implemented a local program that stores the company and research objective in variables. This is a user-reported input-stage milestone, not independent validation or evidence of successful website research. The next stage is to discover the official website and gather source-backed relevant information.
 
 ### 14 October 2026 — Architecture discussion record established
 
