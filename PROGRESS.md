@@ -13,7 +13,7 @@ Our record of difficulties, lessons, successes, and achievements. This file refl
 - The user confirmed Azure connectivity locally and shared a Python search/tool-calling prototype for review. Application code stays local until the user confirms it works; no application files are present in this repository.
 - Browser Use 0.13.11 with Azure GPT-4.1 mini has been tried locally. The user confirmed browser startup and model connectivity; a pasted terminal trace shows navigation and downloads, but neither included Infosys run established retrieval of the requested FY2024–25 report.
 - Candidate relevance, missing-year clarification, HTTP 403 download failures, navigation recovery, and document identity remain reliability issues. Parser integration, caching, and dependable broader evidence retrieval remain unverified.
-- As of 16 October, the user reports a local program that captures company and research-objective variables. This new implementation has not been inspected here. The next requested stage is official-website discovery and relevant-information acquisition, discussed in [RESEARCH_ARCHITECTURE.md](RESEARCH_ARCHITECTURE.md). No application code has been changed or pushed by Codex. A six-to-seven-day focused prototype was previously discussed as a scoped estimate, not a completed capability or guarantee.
+- As of 16 October, the user reports a local program that captures company and research-objective variables. Its intake script, Pydantic request schema, and Azure configuration have received static review; the new implementation has not been executed here. The next requested stage is official-website discovery and relevant-information acquisition, discussed in [RESEARCH_ARCHITECTURE.md](RESEARCH_ARCHITECTURE.md). No application code has been changed or pushed by Codex. A six-to-seven-day focused prototype was previously discussed as a scoped estimate, not a completed capability or guarantee.
 
 ## Challenges and difficulties
 
@@ -62,6 +62,8 @@ The second attempt downloaded an annual report identified by extracted text as F
 The user reports having implemented a local program that stores the company and research objective in variables. This is a user-reported input-stage milestone, not independent validation or evidence of successful website research. The next stage is to discover the official website and gather source-backed relevant information.
 
 **Subsequent review:** The user pasted the intake script. Static review identified its `confirmed_request` handoff, a model-dependent approval gate that may accept a stale proposal if a reply is misclassified, and module-level execution to consider during later integration. The imported request schema and Azure client configuration have not yet been provided. No application code was run or changed. Details are in [RESEARCH_ARCHITECTURE.md](RESEARCH_ARCHITECTURE.md).
+
+**Review completed for the supplied files:** The user then supplied the Pydantic schema and Azure configuration. These were read without executing or changing the application. The schema has no cross-field validators, so the approval-state concern remains open. The configuration loads `.env` relative to its own file and prepares a `/openai/v1/` client; it does not supply web access. The proposed next capability is official-website discovery with retained source evidence.
 
 ### 14 October 2026 — Architecture discussion record established
 

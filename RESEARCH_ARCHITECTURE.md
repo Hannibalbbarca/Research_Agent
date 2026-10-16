@@ -141,6 +141,22 @@ No application code was edited, installed, or pushed in this discussion. Existin
 
 **Next review input:** Ask for `research_request.py` and the client setup in `azure_config.py`, without secret values or the `.env` file. Then define the next component around the actual confirmed-request interface. This was a static review; no application code was executed, edited, or pushed.
 
+## Discussion 9 — 16 October 2026: request schema and Azure configuration reviewed
+
+**Additional material supplied:** `ResearchRequest`, a Pydantic model, and the Azure client configuration. Together with the earlier intake script, all three pieces have now been read. This is static review, not a local execution or independent validation of the user's environment.
+
+**Request schema:** Six fields represent company, objective, readiness to present a proposal, clarification text, the proposed understanding, and user approval. The separate readiness and approval flags distinguish having a complete request from having permission to begin. Nullable fields accept `None`; because they have no defaults, they are still required fields in a Pydantic model instance. Field descriptions guide the model. There are no cross-field validators in the supplied class, so types alone do not enforce logical relationships such as a ready request having a nonempty company/objective or approval corresponding to the last displayed proposal. The earlier approval-gate concern remains open.
+
+**Azure configuration:** `.env` is loaded from beside the configuration file using `Path(__file__).with_name(".env")`. The module exposes an OpenAI SDK client with the Azure resource endpoint extended by `/openai/v1/`, and reads the deployment name separately. Constructing the client prepares requests; the model call occurs in the intake script. No search or browser capability is registered in these three files.
+
+**Integration recommendation:** Keep the reviewed files unchanged for now. The output object already exposes `confirmed_request.company_name` and `confirmed_request.research_objective`. Pass those values to website research after the conversation finishes. The main script should call the new component; the component should not import the interactive main script.
+
+**Smallest next capability proposed:** An official-website finder accepting the company name and returning a status, candidate/established website URL, and source evidence. A later reading operation uses the official website plus the research objective to return relevant source-backed information. Reuse the earlier Browser Use setup as an implementation option rather than restarting the toolkit comparison; if used, its `ChatOpenAI` adapter must be configured separately, since the raw OpenAI SDK client is not the Browser Use `llm` interface.
+
+**First check:** On one company, establish a real official-site URL and retain supporting page evidence. Do not treat a URL generated from memory, successful page loading, or matching search title as sufficient verification. Deeper crawling and report downloading follow after this component is understood and tested.
+
+No application code was run, modified, or committed during this review.
+
 ## Decisions and open questions
 
 **Confirmed:** Maintain the discussion record and examine the architecture incrementally. Set aside prior implementation choices as constraints on this design discussion.
@@ -149,7 +165,7 @@ No application code was edited, installed, or pushed in this discussion. Existin
 
 **Working input assumption:** The user supplies a clear company name; the normal flow does not require asking them to confirm it again.
 
-**Latest milestone:** The user reports local company/objective capture and has provided its intake script for static review. The imported request schema and Azure configuration remain to be reviewed.
+**Latest milestone:** The user reports local company/objective capture. Its intake script, Pydantic request schema, and Azure client configuration have now received static review; the new implementation has not been executed here.
 
 **Next step:** Design and connect website discovery and relevant-page reading to those inputs, starting with the official-site and business-description milestone. Define initial reading scope and source evidence as part of that work.
 
